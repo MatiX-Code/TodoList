@@ -49,16 +49,16 @@ export default function TodoList() {
     return(
         <>
         <h1>Ma TodoList</h1>
-        <img src="" alt="" />
+        <img src="https://thumb.canalplus.pro/http/unsafe/1440x810/filters:quality(80)/media.prod.hawc.canal.aws.io-cplus.net/8f6f191ca6a0b317083b7f295cf0e4e1.jpg" alt="" />
         <ul>{task.map((tasks, index) =>{
             return<li className="liste" key={index}>{tasks.cleanedTask}
-            <Button className="reussi" variant="outlined" color="success">Réussi</Button>
-            <Button className="supprimer" variant="outlined" startIcon={<DeleteIcon />} onClick={() => handleDelete (index)} >Supprimer</Button></li>
+            <Button className="reussi" variant="contained" color="success">Réussi</Button>
+            <Button className="supprimer" variant="contained" startIcon={<DeleteIcon />} onClick={() => handleDelete (index)} color ="error">Supprimer</Button></li>
         })}</ul>
 
-        <form action="submit" onSubmit={handleSubmit}>
-        <input className="task" type="text" name="newTask" value={newTask} onChange={handleChange} />
-        <Button className="submit" type="submit" variant="outlined" endIcon={<SendIcon />} color="secondary">Ajouter</Button>
+        <form action="submit" onSubmit={handleSubmit} className="form">
+        <input className="task" type="text" name="newTask" value={newTask} onChange={handleChange} placeholder="Veuillez rentrer votre nouvelle tâche" />
+        <Button className="submit" type="submit" variant="contained" endIcon={<SendIcon />} color="primary">Ajouter</Button>
         
         </form>
         
