@@ -1,0 +1,28 @@
+li {
+  color: #000;
+  list-style: none;
+  display: grid;
+  /* Colonne 1 (texte) : 250px | Colonne 2 et 3 (boutons) : taille automatique */
+  grid-template-columns: 250px auto auto; 
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.reussi, .supprimer {
+  box-shadow: 5px 5px 5px;
+  width: 60%;
+}
+.task{
+  border-radius: 35px;
+  margin-right: 35px;
+  height: 25px;
+  width: 350px;
+  box-shadow: 5px 5px 5px ;
+}
+h1{
+  text-decoration: underline;
+}
+ .submit{
+  box-shadow:  5px 5px 5px;
+ }
