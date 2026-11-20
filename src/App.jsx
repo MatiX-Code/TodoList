@@ -62,7 +62,7 @@ export default function TodoList() {
     }
 
     // Ajoute la nouvelle tâche à la liste existante sans muter le tableau directement
-    setTask([...task, { cleanedTask, isDone: false }]);
+    setTask([...task, { cleanedTask, isDone: false, rating: 0 }]);
     setNewTask(""); // Réinitialise le champ de saisie
   };
 
@@ -79,6 +79,17 @@ export default function TodoList() {
     const taskCopyUpdated = taskCopy.map((item, idx) => {
       if (idx === indexToggle) {
         return { ...item, isDone: !item.isDone };
+      }
+      return item;
+    });
+    setTask(taskCopyUpdated);
+  };
+  
+  // Met à jour la note (rating) d'une tâche ciblée sans muter le tableau d'origine
+    const handleRatingChange = (indexRating, newValue) => {
+    const taskCopyUpdated = task.map((item, idx) => {
+      if (idx === indexRating) {
+        return { ...item, rating: newValue ?? 0 };
       }
       return item;
     });
@@ -139,23 +150,21 @@ export default function TodoList() {
               </Button>
 
               {/* Système de notation par étoiles */}
-              <Box sx={{ width: 200, display: "flex", alignItems: "center" }}>
+               <Box sx={{ width: 220, display: "flex", alignItems: "center" }}>
                 <Rating
-                  name="hover-feedback"
-                  value={value}
+                  name={`rating-${index}`}
+                  value={tasks.rating}
                   precision={0.5}
                   getLabelText={getLabelText}
                   onChange={(event, newValue) => {
-                    setValue(newValue);
+                    handleRatingChange(index, newValue);
                   }}
-                  onChangeActive={(event, newHover) => {
-                    setHover(newHover);
-                  }}
-                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                  emptyIcon={
+                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                  }
                 />
-                {/* Affiche le label correspondant au survol ou à la valeur choisie */}
-                {value !== null && (
-                  <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+                {tasks.rating !== null && (
+                  <Box sx={{ ml: 2 }}>{labels[tasks.rating]}</Box>
                 )}
               </Box>
             </li>
