@@ -84,7 +84,7 @@ export default function TodoList() {
     });
     setTask(taskCopyUpdated);
   };
-  
+
   // Met à jour la note (rating) d'une tâche ciblée sans muter le tableau d'origine
     const handleRatingChange = (indexRating, newValue) => {
     const taskCopyUpdated = task.map((item, idx) => {
@@ -180,7 +180,7 @@ export default function TodoList() {
           name="newTask"
           value={newTask}
           onChange={handleChange}
-          placeholder="Veuillez rentrer votre nouvelle tâche"
+          placeholder="                Veuillez rentrer votre nouvelle tâche"
         />
         <Button
           className="submit"
@@ -192,6 +192,7 @@ export default function TodoList() {
           Ajouter
         </Button>
       </form>
+      <p>© Projet réalisé avec React - 2026</p>
     </>
   );
 }
