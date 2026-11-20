@@ -16,7 +16,6 @@ li {
 
 .reussi, .supprimer {
   box-shadow: 5px 5px 0px;
-
 }
 .task{
   border-radius: 35px;
@@ -34,8 +33,8 @@ li {
     width: 300px;
     height: auto;
     border-radius: 20px;
-    box-shadow: 10px 10px 0px rgba(17, 16, 16, 0.5);
-    margin-bottom: 40px;
+    box-shadow: 10px 10px 0px #000;
+    margin: 40px 0px;
     border: 2px solid #000000;
 }
 #root{
@@ -47,6 +46,6 @@ li {
   border: 2px solid black;
   padding: 25px;
   border-radius: 35px;
-  box-shadow: 10px 10px 0px;
+  box-shadow: 10px 10px 0px black;
   background-color: #FFB07C;
 }

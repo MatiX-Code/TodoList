@@ -25,16 +25,15 @@ export default function TodoList() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const taskCopy = [...task];
         const cleanedTask = newTask.trim();
 
-        if(cleanedTask.length < 3){
-            return
+        if (cleanedTask.length < 3) {
+            return;
         }
-        taskCopy.push({cleanedTask})
-        setTask(taskCopy);
-        setNewTask("")
-    }
+
+        setTask([...task, { cleanedTask, isDone: false }]);
+        setNewTask("");
+    };
     
     const handleDelete = (indexDelete) =>{
       const taskCopy = [...task]
@@ -42,27 +41,67 @@ export default function TodoList() {
       setTask(taskCopyUpdated);
     }
 
-    const handleToogle = () =>{
+    const handleToogle = (indexToogle) => {
+    const taskCopy = [...task];
+    const taskCopyUpdated = taskCopy.map((tasks, idx) => {
+        if (idx === indexToogle) {
+        return { ...tasks, isDone: !tasks.isDone };
+        }
+        return tasks;
+    });
+    setTask(taskCopyUpdated);
+    };
 
-    }
 // Affichage ( render)
     return(
         <>
-        <h1>Ma TodoList</h1>
+        <h1>̠̠ʍǟ ȶօɖօʟɨֆȶ </h1>
+
         <img src="https://thumb.canalplus.pro/http/unsafe/1440x810/filters:quality(80)/media.prod.hawc.canal.aws.io-cplus.net/8f6f191ca6a0b317083b7f295cf0e4e1.jpg" alt="" />
-        <ul>{task.map((tasks, index) =>{
-            return<li className="liste" key={index}>{tasks.cleanedTask}
-            <Button className="reussi" variant="contained" color="success">Réussi</Button>
-            <Button className="supprimer" variant="contained" startIcon={<DeleteIcon />} onClick={() => handleDelete (index)} color ="error">Supprimer</Button></li>
-        })}</ul>
+        
+        <ul>
+            {task.map((tasks, index) => {
+                let itemStyle = {
+                backgroundColor: "transparent",
+                textDecoration: "none",
+                };
+
+                if (tasks.isDone) {
+                itemStyle = {
+                    backgroundColor: "#13b420",
+                    textDecoration: "line-through",
+                };
+                }
+
+                return (
+                <li className="liste" key={index} style={itemStyle}>
+                    {tasks.cleanedTask}
+                    <Button
+                    className="reussi"
+                    variant="contained"
+                    color="success"
+                    onClick={() => handleToogle(index)}
+                    >
+                    Réussi
+                    </Button>
+                    <Button
+                    className="supprimer"
+                    variant="contained"
+                    startIcon={<DeleteIcon />}
+                    onClick={() => handleDelete(index)}
+                    color="error"
+                    >
+                    Supprimer
+                    </Button>
+                </li>
+                );
+            })}
+        </ul>
 
         <form action="submit" onSubmit={handleSubmit} className="form">
-        <input className="task" type="text" name="newTask" value={newTask} onChange={handleChange} placeholder="Veuillez rentrer votre nouvelle tâche" />
-        <Button className="submit" type="submit" variant="contained" endIcon={<SendIcon />} color="primary">Ajouter</Button>
-        
+            <input className="task" type="text" name="newTask" value={newTask} onChange={handleChange} placeholder="Veuillez rentrer votre nouvelle tâche" />
+            <Button className="submit" type="submit" variant="contained" endIcon={<SendIcon />} color="primary">Ajouter</Button>
         </form>
-        
-            
         </>
     )
 }
